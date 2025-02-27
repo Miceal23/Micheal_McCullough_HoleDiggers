@@ -169,9 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005a2f42c752ea045b3487a6069cfa19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1559428518}
+  player: {fileID: 0}
   distanceToPlayer: 0
-  playerVisible: 1
+  playerVisible: 0
   chaseDistance: 20
   attackDistance: 5
   chaseHysterisis: 2
@@ -586,12 +586,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1559428518}
+  gemPrefab: {fileID: 1591570418262620303, guid: 8a997ac75597b0d42bb74e5ab56429dc, type: 3}
+  waypointsPrefab: {fileID: 8560873365045129249, guid: 60359ab39d3ed3f42ab598c7b21b9ebd, type: 3}
   groundObject: {fileID: 631091595}
   width: 128
   height: 128
   seed: 0
   useRandomSeed: 1
   randomFillPercent: 50
+  numberOfGems: 25
+  gems: []
   numberWaypoints: 4
   waypoints: []
   surface: {fileID: 797153120}
@@ -2473,7 +2477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1625274227
 MonoBehaviour:
   m_ObjectHideFlags: 0

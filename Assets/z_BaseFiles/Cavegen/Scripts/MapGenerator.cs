@@ -10,7 +10,7 @@ using UnityEditor.ShaderGraph.Internal;
 public class MapGenerator : MonoBehaviour {
 
 	public GameObject player; // Reference to your player prefab
-	//public GameObject npcPrefab, waypointsPrefab; // Reference to your NPC prefab
+	public GameObject gemPrefab, waypointsPrefab; // Reference to your Gems prefab
 	public GameObject groundObject;
 	public int width;
 	public int height;
@@ -21,9 +21,8 @@ public class MapGenerator : MonoBehaviour {
 	[Range(0,58)]
 	public int randomFillPercent;
 
-	//Commented out NPC related code for now
-	//[SerializeField] int numberOfNPCs = 5;
-	//[SerializeField] List<GameObject> npcs = new List<GameObject>();
+	[SerializeField] int numberOfGems = 25;
+	[SerializeField] List<GameObject> gems = new List<GameObject>();
 	[SerializeField] int numberWaypoints = 4;
 	[SerializeField] List<GameObject> waypoints = new List<GameObject>();
 
@@ -48,8 +47,8 @@ public class MapGenerator : MonoBehaviour {
         // After the NavMesh is generated/baked, place the player
         PlacePlayer();
 
-		//SpawnWayPoints(numberWaypoints);
-		//SpawnNPCs(numberOfNPCs);
+		SpawnWayPoints(numberWaypoints);
+		SpawnGems(numberOfGems);
 	}
 
 	//Code below regenerates the scene when mouse button down
@@ -494,78 +493,78 @@ public class MapGenerator : MonoBehaviour {
 
 	//Code below spawns NPCs
 
-	//private void SpawnNPCs(int count)
-	//{
-	//	int maxAttempts = 1000;
-	//	for (int i = 0; i < count; i++)
-	//	{
-	//		Vector3 randomNPCPos = Vector3.zero;
-	//		bool validPositionFound = false;
-	//		int attempts = 0;
+	private void SpawnGems(int count)
+	{
+		int maxAttempts = 1000;
+		for (int i = 0; i < count; i++)
+		{
+			Vector3 randomGemsPos = Vector3.zero;
+			bool validPositionFound = false;
+			int attempts = 0;
 
-	//		while (!validPositionFound && attempts < maxAttempts)
-	//		{
-	//			randomNPCPos = GetRandomGroundPoint();
-	//			if (randomNPCPos != Vector3.zero)
-	//			{
-	//				NavMeshHit hit;
-	//				if (NavMesh.SamplePosition(randomNPCPos, out hit, 1.0f, NavMesh.AllAreas))
-	//				{
-	//					randomNPCPos = hit.position;
-	//					validPositionFound = true;
-	//				}
-	//			}
-	//			attempts++;
-	//		}
+			while (!validPositionFound && attempts < maxAttempts)
+			{
+				randomGemsPos = GetRandomGroundPoint();
+				if (randomGemsPos != Vector3.zero)
+				{
+					NavMeshHit hit;
+					if (NavMesh.SamplePosition(randomGemsPos, out hit, 1.0f, NavMesh.AllAreas))
+					{
+						randomGemsPos = hit.position;
+						validPositionFound = true;
+					}
+				}
+				attempts++;
+			}
 
-	//		if (validPositionFound)
-	//		{
-	//			Instantiate(npcPrefab, randomNPCPos, Quaternion.identity);
-	//			// add the NPC to the list
-	//			npcs.Add(npcPrefab);
-	//		}
-	//		else
-	//		{
-	//			Debug.LogWarning("Failed to find a valid NavMesh point for NPC.");
-	//		}
-	//	}
-	//}
+			if (validPositionFound)
+			{
+				Instantiate(gemPrefab, randomGemsPos, Quaternion.identity);
+				// add the NPC to the list
+				gems.Add(gemPrefab);
+			}
+			else
+			{
+				Debug.LogWarning("Failed to find a valid NavMesh point for Gems.");
+			}
+		}
+	}
 
- //   private void SpawnWayPoints(int count)
-	//{
+	private void SpawnWayPoints(int count)
+	{
 
- //       for (int i = 0; i < count; i++)
-	//	{
-	//		Vector3 randomNPCPos = Vector3.zero;
-	//		bool validPositionFound = false;
-	//		int attempts = 0;
+		for (int i = 0; i < count; i++)
+		{
+			Vector3 randomGemPos = Vector3.zero;
+			bool validPositionFound = false;
+			int attempts = 0;
 
-	//		while (!validPositionFound && attempts < maxAttempts)
-	//		{
-	//			randomNPCPos = GetRandomGroundPoint();
-	//			if (randomNPCPos != Vector3.zero)
-	//			{
-	//				NavMeshHit hit;
-	//				if (NavMesh.SamplePosition(randomNPCPos, out hit, 1.0f, NavMesh.AllAreas))
-	//				{
-	//					randomNPCPos = hit.position;
-	//					validPositionFound = true;
-	//				}
-	//			}
-	//			attempts++;
-	//		}
+			while (!validPositionFound && attempts < maxAttempts)
+			{
+				randomGemPos = GetRandomGroundPoint();
+				if (randomGemPos != Vector3.zero)
+				{
+					NavMeshHit hit;
+					if (NavMesh.SamplePosition(randomGemPos, out hit, 1.0f, NavMesh.AllAreas))
+					{
+						randomGemPos = hit.position;
+						validPositionFound = true;
+					}
+				}
+				attempts++;
+			}
 
-	//		if (validPositionFound)
-	//		{
-	//			Instantiate(waypointsPrefab, randomNPCPos, Quaternion.identity);
-	//			// add the NPC to the list
-	//			waypoints.Add(waypointsPrefab);
-	//		}
-	//		else
-	//		{
-	//			Debug.LogWarning("Failed to find a valid NavMesh point for Waypoint.");
-	//		}
-	//	}
- //   }
+			if (validPositionFound)
+			{
+				Instantiate(waypointsPrefab, randomGemPos, Quaternion.identity);
+				// add the NPC to the list
+				waypoints.Add(waypointsPrefab);
+			}
+			else
+			{
+				Debug.LogWarning("Failed to find a valid NavMesh point for Waypoint.");
+			}
+		}
+	}
 
 }
