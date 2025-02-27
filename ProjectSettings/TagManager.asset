@@ -9,6 +9,9 @@ TagManager:
   - Walls
   - NPC
   - Waypoint
+  - Flocker
+  - Gem
+  - Worm
   layers:
   - Default
   - TransparentFX
