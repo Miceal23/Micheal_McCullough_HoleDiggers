@@ -5,6 +5,8 @@ public class LevelEnd : MonoBehaviour
 {
     [SerializeField] Timer timer;
     [SerializeField] Gems gems;
+    [SerializeField] private GameObject Lose;
+    [SerializeField] private GameObject Win;
     public Player player;
 
     private void Start()
@@ -13,11 +15,21 @@ public class LevelEnd : MonoBehaviour
     }
     void Update()
     {
-       if(timer.remainingTime == 0)
+       if(timer.remainingTime == 0 && gems.isMore)
        {
-            //Disable character controller
-            // in here will be something comparing worm and player gems. player gems => worm gems. player wins. else = player lose
+            CharacterController.Destroy(gameObject);
+            Win.SetActive(true);
+       }
+       else
+       {
+            CharacterController.Destroy(gameObject);
+            Lose.SetActive(true);
 
+       }
+
+        if (Lose == true || Win == true)
+        {
+            //Video link for reset level & set active = true
             //https://www.youtube.com/watch?v=TVSLCZWYL_E
         }
     }
