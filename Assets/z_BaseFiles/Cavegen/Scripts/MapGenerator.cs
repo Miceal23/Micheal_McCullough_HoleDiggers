@@ -11,6 +11,7 @@ public class MapGenerator : MonoBehaviour {
 
 	public GameObject player; // Reference to your player prefab
 	public GameObject gemPrefab, waypointsPrefab; // Reference to your Gems prefab
+	public GameObject wormPrefab;
 	public GameObject groundObject;
 	public int width;
 	public int height;
@@ -22,9 +23,11 @@ public class MapGenerator : MonoBehaviour {
 	public int randomFillPercent;
 
 	[SerializeField] int numberOfGems = 25;
+	[SerializeField] int numberOfWorms = 1;
 	[SerializeField] List<GameObject> gems = new List<GameObject>();
 	[SerializeField] int numberWaypoints = 4;
 	[SerializeField] List<GameObject> waypoints = new List<GameObject>();
+	[SerializeField] List<GameObject> worms = new List<GameObject>();
 
 	int[,] map;
 
@@ -49,6 +52,7 @@ public class MapGenerator : MonoBehaviour {
 
 		SpawnWayPoints(numberWaypoints);
 		SpawnGems(numberOfGems);
+		SpawnWorms(numberOfWorms);
 	}
 
 	//Code below regenerates the scene when mouse button down
@@ -491,7 +495,7 @@ public class MapGenerator : MonoBehaviour {
         return Vector3.zero;
 	}
 
-	//Code below spawns NPCs
+	//Code below spawns worms and gems
 
 	private void SpawnGems(int count)
 	{
@@ -529,13 +533,50 @@ public class MapGenerator : MonoBehaviour {
 			}
 		}
 	}
+    private void SpawnWorms(int count)
+    {
+        int maxAttempts = 1000;
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 randomWormsPos = Vector3.zero;
+            bool validPositionFound = false;
+            int attempts = 0;
 
-	private void SpawnWayPoints(int count)
+            while (!validPositionFound && attempts < maxAttempts)
+            {
+                randomWormsPos = GetRandomGroundPoint();
+                if (randomWormsPos != Vector3.zero)
+                {
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(randomWormsPos, out hit, 1.0f, NavMesh.AllAreas))
+                    {
+                        randomWormsPos = hit.position;
+                        validPositionFound = true;
+                    }
+                }
+                attempts++;
+            }
+
+            if (validPositionFound)
+            {
+                Instantiate(wormPrefab, randomWormsPos, Quaternion.identity);
+                // add the NPC to the list
+                worms.Add(wormPrefab);
+            }
+            else
+            {
+                Debug.LogWarning("Failed to find a valid NavMesh point for Worms.");
+            }
+        }
+    }
+
+    private void SpawnWayPoints(int count)
 	{
 
 		for (int i = 0; i < count; i++)
 		{
 			Vector3 randomGemPos = Vector3.zero;
+			Vector3 randomWormPos = Vector3.zero;
 			bool validPositionFound = false;
 			int attempts = 0;
 
@@ -564,7 +605,32 @@ public class MapGenerator : MonoBehaviour {
 			{
 				Debug.LogWarning("Failed to find a valid NavMesh point for Waypoint.");
 			}
-		}
+            while (!validPositionFound && attempts < maxAttempts)
+            {
+                randomWormPos = GetRandomGroundPoint();
+                if (randomWormPos != Vector3.zero)
+                {
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(randomWormPos, out hit, 1.0f, NavMesh.AllAreas))
+                    {
+                        randomWormPos = hit.position;
+                        validPositionFound = true;
+                    }
+                }
+                attempts++;
+            }
+
+            if (validPositionFound)
+            {
+                Instantiate(waypointsPrefab, randomWormPos, Quaternion.identity);
+                // add the NPC to the list
+                waypoints.Add(waypointsPrefab);
+            }
+            else
+            {
+                Debug.LogWarning("Failed to find a valid NavMesh point for Waypoint.");
+            }
+        }
 	}
 
 }
