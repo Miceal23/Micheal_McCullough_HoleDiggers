@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Gems : MonoBehaviour
 {
-    private int Gem = 0;
+    public int Gem = 0;
     public TextMeshProUGUI gemText;
 
     private void OnTriggerEnter(Collider other)
