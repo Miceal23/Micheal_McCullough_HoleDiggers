@@ -6,7 +6,8 @@ public class Gems : MonoBehaviour
 {
     public int PlayerGems = 0;
     public int WormGems = 0;
-    public TextMeshProUGUI gemText;
+    public TextMeshProUGUI PlayerGemText;
+    public TextMeshProUGUI WormGemText;
     public bool isMore;
 
     private void OnTriggerEnter(Collider other)
@@ -24,7 +25,7 @@ public class Gems : MonoBehaviour
             if (other.transform.tag == "Gem")
             {
                 PlayerGems++;
-                gemText.text = "Player Gems: " + PlayerGems.ToString();
+                PlayerGemText.text = "Player Gems: " + PlayerGems.ToString();
                 Debug.Log("Gem");
                 Destroy(other.gameObject);
             }
@@ -35,7 +36,7 @@ public class Gems : MonoBehaviour
             if (other.transform.tag == "Gem")
             {
                 WormGems++;
-                gemText.text = "Worm Gems: " + WormGems.ToString();
+                WormGemText.text = "Worm Gems: " + WormGems.ToString();
                 Debug.Log("Gem");
                 Destroy(other.gameObject);
             }
