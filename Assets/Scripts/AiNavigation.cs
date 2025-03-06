@@ -3,16 +3,19 @@ using UnityEngine.AI;
 
 public class AiNavigation : MonoBehaviour
 {
-    public Transform gems;
+    public GameObject Gem;
     private NavMeshAgent agent;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        
     }
 
     private void Update()
     {
-        agent.destination = gems.position;
+        Gem = GameObject.Find("Gem(Clone)"); //change this to tag or even closest one
+        agent.SetDestination(Gem.transform.position);
+        //GameObject.FindGameObjectsWithTag("Gem");
     }
 }
