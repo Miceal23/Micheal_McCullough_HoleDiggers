@@ -5,46 +5,32 @@ using UnityEngine;
 public class LevelEnd : MonoBehaviour
 {
     [SerializeField] Timer timer;
-    [SerializeField] GameObject PlayerGems;
-    [SerializeField] GameObject WormGems;
     [SerializeField] private GameObject Lose;
     [SerializeField] private GameObject Win;
-    private Player player;
     public Gems gems;
+    public GameObject player;
 
-    private void Start()
-    {
-        player = GetComponent<Player>();
-        gems = GetComponent<Gems>();
-    }
+    //public void Components()
+    //{
+    //    player = GetComponent<GameObject>();
+    //    gems = GetComponent<Gems>();
+    //}
     void Update()
     {   
         if (timer.remainingTime <= 0)
         {
             if (gems.isMore == true)
             {
-                CharacterController.Destroy(gameObject);
+                //player.GetComponent<CharacterController>().enabled = false;
                 Win.SetActive(true);
             }
 
             else
             {
-                //CharacterController.Destroy(gameObject);
+                //player.GetComponent<CharacterController>().enabled = false;
                 Lose.SetActive(true);
             }
         }
-
-       //if (timer.remainingTime == 0 && gems.isMore)
-       //{
-       //     CharacterController.Destroy(gameObject);
-       //     Win.SetActive(true);
-       //}
-       //else
-       //{
-       //     CharacterController.Destroy(gameObject);
-       //     Lose.SetActive(true);
-
-       //}
 
         if (Lose == true || Win == true)
         {

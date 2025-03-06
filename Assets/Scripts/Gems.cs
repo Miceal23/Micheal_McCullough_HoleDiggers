@@ -4,48 +4,28 @@ using UnityEngine;
 
 public class Gems : MonoBehaviour
 {
-    public int PlayerGems = 0;
-    public int WormGems = 0;
-    public TextMeshProUGUI PlayerGemText;
-    public TextMeshProUGUI WormGemText;
+
+    [SerializeField] int wormGems = 0;
+    [SerializeField] int playerGems = 0;
+    [SerializeField] TextMeshProUGUI WormGemText;
+    [SerializeField] TextMeshProUGUI PlayerGemText;
     public bool isMore;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //if(other.transform.tag == "Gem")
-        //{
-        //    Gem++;
-        //    gemText.text = "Player Gems: " + Gem.ToString();
-        //    Debug.Log(Gem);
-        //    Destroy(other.gameObject);
-        //}
-
-        if(tag == "Player")
-        {
-            if (other.transform.tag == "Gem")
-            {
-                PlayerGems++;
-                PlayerGemText.text = "Player Gems: " + PlayerGems.ToString();
-                Debug.Log("Gem");
-                Destroy(other.gameObject);
-            }
-        }
-
-        if(tag == "Worm")
-        {
-            if (other.transform.tag == "Gem")
-            {
-                WormGems++;
-                WormGemText.text = "Worm Gems: " + WormGems.ToString();
-                Debug.Log("Gem");
-                Destroy(other.gameObject);
-            }
-        }
-
+    public void PlayerGemUpdate()
+    { 
+        playerGems++;
+        PlayerGemText.text = "Player Gems: " + playerGems.ToString();
     }
-    private void Update()
+
+    public void WormGemUpdate()
     {
-        if (PlayerGems > WormGems)
+        wormGems++;
+        WormGemText.text = "Worm Gems: " + wormGems.ToString();
+    }
+
+    void Update()
+    {
+        if (playerGems > wormGems)
         {
             isMore = true;
         }
