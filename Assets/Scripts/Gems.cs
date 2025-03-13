@@ -10,6 +10,7 @@ public class Gems : MonoBehaviour
     [SerializeField] TextMeshProUGUI WormGemText;
     [SerializeField] TextMeshProUGUI PlayerGemText;
     public bool isMore;
+    public bool Draw;
 
     public void PlayerGemUpdate()
     { 
@@ -29,9 +30,15 @@ public class Gems : MonoBehaviour
         {
             isMore = true;
         }
-        else
+        
+        if (playerGems < wormGems)
         {
             isMore = false;
         }
+
+        //if (playerGems == wormGems)
+        //{
+        //    Draw = true;
+        //}
     }
 }

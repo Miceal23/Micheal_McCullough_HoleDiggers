@@ -67,9 +67,11 @@ public class Mining : MonoBehaviour
     //change this so instead of height its digging infront of the player
     private void TerraformTerrain(Vector3 position, float height, float range)
     {
+        mesh =meshCollider.sharedMesh;
         mesh = meshFilter.sharedMesh;
         vertices = mesh.vertices;
         position -= meshFilter.transform.position;
+        position -= meshCollider.transform.position;
 
         int i = 0;
         foreach(Vector3 vert in vertices)
