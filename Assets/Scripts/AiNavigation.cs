@@ -9,12 +9,11 @@ public class AiNavigation : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        
     }
 
     private void Update()
     {
-        Gem = GameObject.Find("Gem(Clone)"); //change this to tag or even closest one
+        Gem = GameObject.FindWithTag("Gem"); //change this to tag or even closest one
         agent.SetDestination(Gem.transform.position);
         //GameObject.FindGameObjectsWithTag("Gem");
     }
