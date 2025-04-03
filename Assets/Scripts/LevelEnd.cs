@@ -10,6 +10,8 @@ public class LevelEnd : MonoBehaviour
     [SerializeField] private GameObject Draw;
     public Gems gems;
     public GameObject player;
+    //public AudioSource win;
+    //public AudioSource lose;
 
     //public void Components()
     //{
@@ -23,13 +25,17 @@ public class LevelEnd : MonoBehaviour
             if (gems.isMore == true && gems.Draw == false)
             {
                 //player.GetComponent<CharacterController>().enabled = false;
+                //win.Play();
                 Win.SetActive(true);
+                
             }
 
             if (gems.isMore == false && gems.Draw == false)
             {
                 //player.GetComponent<CharacterController>().enabled = false;
+                //lose.Play();
                 Lose.SetActive(true);
+                
             }
 
             //if (gems.Draw == true)
