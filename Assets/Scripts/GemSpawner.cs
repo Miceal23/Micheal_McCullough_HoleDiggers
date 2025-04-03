@@ -12,6 +12,7 @@ public class GemSpawner : MonoBehaviour
         int spawnPointZ = Random.Range(-11, 11);
 
         Vector3 spawnPosition = new Vector3(spawnPointX, spawnPointY, spawnPointZ);
+        //Vector3 spawnRotation = new Vector3(spawnPointX, spawnPointY, spawnPointZ);
 
         Instantiate(Gem, spawnPosition, Quaternion.identity);
     }

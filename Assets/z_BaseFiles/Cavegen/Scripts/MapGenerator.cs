@@ -507,14 +507,14 @@ public class MapGenerator : MonoBehaviour {
 		int maxAttempts = 1000;
 		for (int i = 0; i < count; i++)
 		{
-			Vector3 randomGemsPos = Vector3.zero;
+			Vector3 randomGemsPos = new Vector3(0, 1f, 0);
 			bool validPositionFound = false;
 			int attempts = 0;
 
 			while (!validPositionFound && attempts < maxAttempts)
 			{
 				randomGemsPos = GetRandomGroundPoint();
-				if (randomGemsPos != Vector3.zero)
+				if (randomGemsPos != new Vector3(0, 1f, 0))
 				{
 					NavMeshHit hit;
 					if (NavMesh.SamplePosition(randomGemsPos, out hit, 1.0f, NavMesh.AllAreas))
@@ -528,7 +528,7 @@ public class MapGenerator : MonoBehaviour {
 
 			if (validPositionFound)
 			{
-				Instantiate(gemPrefab, randomGemsPos, Quaternion.identity);
+				Instantiate(gemPrefab, randomGemsPos, Quaternion.Euler(-90, 0, 0));
 				// add the NPC to the list
 				gems.Add(gemPrefab);
 			}
@@ -551,7 +551,7 @@ public class MapGenerator : MonoBehaviour {
 			while (!validPositionFound && attempts < maxAttempts)
 			{
 				randomGemPos = GetRandomGroundPoint();
-				if (randomGemPos != Vector3.zero)
+				if (randomGemPos != new Vector3(0, 1, 0))
 				{
 					NavMeshHit hit;
 					if (NavMesh.SamplePosition(randomGemPos, out hit, 1.0f, NavMesh.AllAreas))
