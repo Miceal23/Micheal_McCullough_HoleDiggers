@@ -96,7 +96,7 @@ public class MeshGenerator : MonoBehaviour {
 		wallMesh.triangles = wallTriangles.ToArray ();
 		walls.mesh = wallMesh;
 
-		MeshCollider wallCollider = gameObject.AddComponent<MeshCollider> ();
+		MeshCollider wallCollider = gameObject.AddComponent<MeshCollider> (); //have mining script interact here?
 		wallCollider.sharedMesh = wallMesh;
 
 		    // Create a collider for the top surface of the mesh
