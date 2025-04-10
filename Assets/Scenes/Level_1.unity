@@ -549,9 +549,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1559428518}
-  worm: {fileID: 1468372891}
   gemPrefab: {fileID: 1591570418262620303, guid: 8a997ac75597b0d42bb74e5ab56429dc, type: 3}
   waypointsPrefab: {fileID: 8560873365045129249, guid: 60359ab39d3ed3f42ab598c7b21b9ebd, type: 3}
+  wormPrefab: {fileID: 8834413170316390956, guid: 76b003425ed4a6e46ab51561b63c5db2, type: 3}
   groundObject: {fileID: 631091595}
   width: 128
   height: 128
@@ -559,8 +559,10 @@ MonoBehaviour:
   useRandomSeed: 1
   randomFillPercent: 50
   numberOfGems: 25
+  numberOfWorms: 1
   gems:
   - {fileID: 0}
+  worm: []
   numberWaypoints: 4
   waypoints: []
   surface: {fileID: 797153120}
@@ -3757,11 +3759,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464303006}
   m_CullTransparentMesh: 1
---- !u!1 &1468372891 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8834413170316390956, guid: 76b003425ed4a6e46ab51561b63c5db2, type: 3}
-  m_PrefabInstance: {fileID: 6639172108957921052}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1551555082
 GameObject:
   m_ObjectHideFlags: 0
@@ -6267,6 +6264,10 @@ PrefabInstance:
     - target: {fileID: 8834413170316390956, guid: 76b003425ed4a6e46ab51561b63c5db2, type: 3}
       propertyPath: m_Name
       value: Worm
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834413170316390956, guid: 76b003425ed4a6e46ab51561b63c5db2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

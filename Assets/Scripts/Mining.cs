@@ -15,6 +15,7 @@ public class Mining : MonoBehaviour
 
     private MeshFilter meshFilter;
     private MeshCollider meshCollider;
+    //[SerializeField] MeshGenerator meshGenerator;
 
     void Start()
     {
@@ -64,11 +65,11 @@ public class Mining : MonoBehaviour
     private Mesh mesh;
     private Vector3[] vertices;
     
-    //change this so instead of height its digging infront of the player
     private void TerraformTerrain(Vector3 position, float height, float range)
     {
         mesh = meshCollider.sharedMesh;
         mesh = meshFilter.sharedMesh;
+        //mesh = meshGenerator;
         vertices = mesh.vertices;
         position -= meshFilter.transform.position;
         position -= meshCollider.transform.position;

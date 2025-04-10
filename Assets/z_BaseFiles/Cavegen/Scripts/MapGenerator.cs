@@ -10,8 +10,7 @@ using UnityEditor.ShaderGraph.Internal;
 public class MapGenerator : MonoBehaviour {
 
 	public GameObject player; // Reference to your player prefab
-	public GameObject worm;
-	public GameObject gemPrefab, waypointsPrefab; // Reference to your Gems prefab
+	public GameObject gemPrefab, waypointsPrefab, wormPrefab; // Reference to your Gems prefab
 	public GameObject groundObject;
 	public int width;
 	public int height;
@@ -23,8 +22,10 @@ public class MapGenerator : MonoBehaviour {
 	public int randomFillPercent;
 
 	[SerializeField] int numberOfGems = 25;
-	[SerializeField] List<GameObject> gems = new List<GameObject>();
-	[SerializeField] int numberWaypoints = 4;
+    [SerializeField] int numberOfWorms = 1;
+    [SerializeField] List<GameObject> gems = new List<GameObject>();
+    [SerializeField] List<GameObject> worm = new List<GameObject>();
+    [SerializeField] int numberWaypoints = 4;
 	[SerializeField] List<GameObject> waypoints = new List<GameObject>();
 
 	int[,] map;
@@ -47,9 +48,10 @@ public class MapGenerator : MonoBehaviour {
 
         // After the NavMesh is generated/baked, place the player
         PlacePlayer();
-		PlaceWorm();
+		//PlaceWorm();
+		SpawnWorm(numberOfWorms);
 
-		SpawnWayPoints(numberWaypoints);
+        SpawnWayPoints(numberWaypoints);
 		SpawnGems(numberOfGems);
 	}
 
@@ -465,12 +467,12 @@ public class MapGenerator : MonoBehaviour {
 		player.transform.position = randomPlayerPos;
     }
 
-	private void PlaceWorm()
-	{
-		Vector3 randomWormPos = GetRandomGroundPoint();
+	//private void PlaceWorm()
+	//{
+	//	Vector3 randomWormPos = GetRandomGroundPoint();
 
-		worm.transform.position = randomWormPos;
-	}
+	//	worm.transform.position = randomWormPos;
+	//}
 	
     // Call this method to obtain a random point on an object tagged "Ground".
     public Vector3 GetRandomGroundPoint()
@@ -528,6 +530,7 @@ public class MapGenerator : MonoBehaviour {
 
 			if (validPositionFound)
 			{
+
 				Instantiate(gemPrefab, randomGemsPos, Quaternion.Euler(-90, 0, 0));
 				// add the NPC to the list
 				gems.Add(gemPrefab);
@@ -535,6 +538,42 @@ public class MapGenerator : MonoBehaviour {
 			else
 			{
 				Debug.LogWarning("Failed to find a valid NavMesh point for Gems.");
+			}
+		}
+	}	private void SpawnWorm(int count)
+	{
+		int maxAttempts = 1000;
+		for (int i = 0; i < count; i++)
+		{
+			Vector3 randomWormPos = new Vector3(0, 1f, 0);
+			bool validPositionFound = false;
+			int attempts = 0;
+
+			while (!validPositionFound && attempts < maxAttempts)
+			{
+				randomWormPos = GetRandomGroundPoint();
+				if (randomWormPos != new Vector3(0, 1f, 0))
+				{
+					NavMeshHit hit;
+					if (NavMesh.SamplePosition(randomWormPos, out hit, 1.0f, NavMesh.AllAreas))
+					{
+						randomWormPos = hit.position;
+						validPositionFound = true;
+					}
+				}
+				attempts++;
+			}
+
+			if (validPositionFound)
+			{
+
+				Instantiate(wormPrefab, randomWormPos, Quaternion.Euler(-90, 0, 0));
+				// add the NPC to the list
+				worm.Add(wormPrefab);
+			}
+			else
+			{
+				Debug.LogWarning("Failed to find a valid NavMesh point for Worm.");
 			}
 		}
 	}

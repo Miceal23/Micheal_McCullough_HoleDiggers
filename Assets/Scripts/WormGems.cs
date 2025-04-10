@@ -11,7 +11,7 @@ public class WormGems : MonoBehaviour
         {
             if (other.transform.tag == "Gem")
             {
-                gems.WormGemUpdate();
+                GameObject.Find("Gamemanager").GetComponent<Gems>().WormGemUpdate();
                 Destroy(other.gameObject);
                 Debug.Log("Worm Gem Collision");
             }
