@@ -1,4 +1,3 @@
-using Autodesk.Fbx;
 using TMPro;
 using UnityEngine;
 
