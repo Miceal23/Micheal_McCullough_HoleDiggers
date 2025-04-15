@@ -13,4 +13,10 @@ public class MenuScript : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Restart()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
 }

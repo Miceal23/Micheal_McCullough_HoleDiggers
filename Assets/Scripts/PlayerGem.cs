@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerGem : MonoBehaviour
 {
     [SerializeField] Gems gems;
-    public AudioSource audio;
+    public AudioSource audioo;
     public void OnTriggerEnter(Collider other)
     { 
         if (gameObject.tag == "Player")
@@ -14,7 +14,7 @@ public class PlayerGem : MonoBehaviour
             if (other.transform.tag == "Gem")
             {
                 gems.PlayerGemUpdate();
-                audio.Play();
+                audioo.Play();
                 
                 Destroy(other.gameObject);
                 Debug.Log("Gem Collision");

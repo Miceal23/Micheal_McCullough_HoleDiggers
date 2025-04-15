@@ -7,52 +7,35 @@ public class LevelEnd : MonoBehaviour
     [SerializeField] Timer timer;
     [SerializeField] private GameObject Lose;
     [SerializeField] private GameObject Win;
-    [SerializeField] private GameObject Draw;
     public Gems gems;
     public GameObject player;
-    //public AudioSource win;
-    //public AudioSource lose;
 
-    //public void Components()
-    //{
-    //    player = GetComponent<GameObject>();
-    //    gems = GetComponent<Gems>();
-    //}
-    void Update()
+    void FixedUpdate()
     {   
         if (timer.remainingTime <= 0)
         {
-            if (gems.isMore == true && gems.Draw == false)
+            Cursor.lockState = CursorLockMode.None;
+
+            if (gems.isMore == true)
             {
-                //player.GetComponent<CharacterController>().enabled = false;
-                //win.Play();
+                player.GetComponent<CharacterController>().enabled = false;
                 Win.SetActive(true);
-                
+                if (GameObject.FindWithTag("Worm").activeInHierarchy)
+                {
+                    GameObject.FindWithTag("Worm").SetActive(false);
+                }
+
             }
 
-            if (gems.isMore == false && gems.Draw == false)
+            if (gems.isMore == false)
             {
-                //player.GetComponent<CharacterController>().enabled = false;
-                //lose.Play();
+                player.GetComponent<CharacterController>().enabled = false;
                 Lose.SetActive(true);
-                
+                if (GameObject.FindWithTag("Worm").activeInHierarchy)
+                {
+                    GameObject.FindWithTag("Worm").SetActive(false);
+                }
             }
-
-            //if (gems.Draw == true)
-            //{
-            //    Draw.SetActive(true);
-            //}
-
-            //if (gems.Draw == false)
-            //{
-            //    Draw.SetActive(false);
-            //}
-        }
-
-        if (Lose == true || Win == true)
-        {
-            //Video link for reset level & set active = true
-            //https://www.youtube.com/watch?v=TVSLCZWYL_E
         }
     }
 }
