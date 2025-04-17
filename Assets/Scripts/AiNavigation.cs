@@ -13,7 +13,7 @@ public class AiNavigation : MonoBehaviour
 
     private void Update()
     {
-        Gem = GameObject.FindWithTag("Gem"); //change this to closest one
+        Gem = GameObject.FindWithTag("Gem");
         agent.SetDestination(Gem.transform.position);
     }
 }

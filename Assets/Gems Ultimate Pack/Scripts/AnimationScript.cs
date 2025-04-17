@@ -31,7 +31,7 @@ public class AnimationScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
        
         
@@ -63,7 +63,7 @@ public class AnimationScript : MonoBehaviour {
                 }
             }
 
-            if(isScaling)
+            if (isScaling)
             {
                 scaleTimer += Time.deltaTime;
 
@@ -76,7 +76,7 @@ public class AnimationScript : MonoBehaviour {
                     transform.localScale = Vector3.Lerp(transform.localScale, startScale, scaleSpeed * Time.deltaTime);
                 }
 
-                if(scaleTimer >= scaleRate)
+                if (scaleTimer >= scaleRate)
                 {
                     if (scalingUp) { scalingUp = false; }
                     else if (!scalingUp) { scalingUp = true; }

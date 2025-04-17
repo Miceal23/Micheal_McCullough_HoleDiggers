@@ -55,27 +55,6 @@ public class MapGenerator : MonoBehaviour {
 		SpawnGems(numberOfGems);
 	}
 
-	//Code below regenerates the scene when mouse button down
-
- //   void Update() {
-	//	if (Input.GetMouseButtonDown(1)) {
-	//		GenerateMap();
-	//		surface.BuildNavMesh();
-	//		PlacePlayer();
-
-	//		// delete existing NPCs and spawn new ones
-	//		GameObject[] go_npcs = GameObject.FindGameObjectsWithTag("NPC");
-	//		foreach (GameObject npc in go_npcs) Destroy(npc);
-
-
-	//		GameObject[] go_wps = GameObject.FindGameObjectsWithTag("Waypoint");
-	//		foreach (GameObject wp in go_wps) Destroy(wp);
-
-	//		SpawnWayPoints(numberWaypoints);
-	//		SpawnNPCs(numberOfNPCs);
-	//	}
-	//}
-
 	void GenerateMap() {
 		map = new int[width,height];
 		RandomFillMap();
@@ -209,7 +188,6 @@ public class MapGenerator : MonoBehaviour {
 
 	void CreatePassage(Room roomA, Room roomB, Coord tileA, Coord tileB) {
 		Room.ConnectRooms (roomA, roomB);
-		//Debug.DrawLine (CoordToWorldPoint (tileA), CoordToWorldPoint (tileB), Color.green, 100);
 
 		List<Coord> line = GetLine (tileA, tileB);
 		foreach (Coord c in line) {
@@ -459,7 +437,6 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	
-	// another approach that didn't quite work
 	private void PlacePlayer()
     {
         Vector3 randomPlayerPos = GetRandomGroundPoint();
@@ -467,14 +444,6 @@ public class MapGenerator : MonoBehaviour {
 		player.transform.position = randomPlayerPos;
     }
 
-	//private void PlaceWorm()
-	//{
-	//	Vector3 randomWormPos = GetRandomGroundPoint();
-
-	//	worm.transform.position = randomWormPos;
-	//}
-	
-    // Call this method to obtain a random point on an object tagged "Ground".
     public Vector3 GetRandomGroundPoint()
     {
         Bounds groundBounds = groundObject.GetComponent<Renderer>().bounds;
@@ -509,14 +478,14 @@ public class MapGenerator : MonoBehaviour {
 		int maxAttempts = 1000;
 		for (int i = 0; i < count; i++)
 		{
-			Vector3 randomGemsPos = new Vector3(0, 1f, 0);
+			Vector3 randomGemsPos = new Vector3(0, 0, 1);
 			bool validPositionFound = false;
 			int attempts = 0;
 
 			while (!validPositionFound && attempts < maxAttempts)
 			{
 				randomGemsPos = GetRandomGroundPoint();
-				if (randomGemsPos != new Vector3(0, 1f, 0))
+				if (randomGemsPos != new Vector3(0, 0, 1))
 				{
 					NavMeshHit hit;
 					if (NavMesh.SamplePosition(randomGemsPos, out hit, 1.0f, NavMesh.AllAreas))
